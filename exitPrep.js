@@ -145,8 +145,15 @@ var comedianNamesFilteredAndMapped = (comedians) => {
 
 /* Solve by using native method of reduce only */
 var comediansReduced1 = (comedians) => {
-    // Your code here
-
+    return comedians.reduce((acc, cur)=>{
+        if(cur.begin >= 2005){
+        acc = acc.concat({
+            appearanceNumber: `#${cur.number}`,
+            name: cur.actor,
+            seasonsActive: cur.end - cur.begin + 1})
+        }
+        return acc;
+    }, []);
 };
 
 var comediansReduced2 = (comedians) => {
