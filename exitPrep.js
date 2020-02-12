@@ -137,8 +137,7 @@ var comediansFilteredAndMapped = (comedians) => {
 };
 
 var comedianNamesFilteredAndMapped = (comedians) => {
-    // Your code here
-
+    return comedians.filter((comedian)=> comedian.begin >= 2005).map((obj)=>obj.actor)
 };
 
 
