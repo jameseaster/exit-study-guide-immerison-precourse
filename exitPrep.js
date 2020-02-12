@@ -63,18 +63,28 @@ const mergeObjects = (obj, ...args) => {
 
 var replaceValuesInObj = (obj, value, newValue) => {
     for(let key in obj) {
-        if(obj[key] === value) {
-            obj[key] = newValue;
-        }
-        if(obj[key].constructor === Object){
-            obj[key] = replaceValuesInObj(obj[key], value, newValue);
-        }
+        if(obj[key] === value) obj[key] = newValue;
+        if(obj[key].constructor === Object) obj[key] = replaceValuesInObj(obj[key], value, newValue);
     }
     return obj;
 };
 
 var addKeysToExistingObj = (obj, newKey, newValue) => {
-    // your code here
+    // IOCE
+    // Input: object, newKey, newValue
+    // Output: updated object with key/value added to key list of keys
+    // constraints: use recursion
+    // edge cases:
+    //
+    let keys = Object.keys(obj);
+    keys.push(newKey);
+    obj[newKey] = newValue;
+    keys.forEach((key)=> {
+        return obj[key].constructor === Object ?
+        addKeysToExistingObj(obj[key], newKey, newValue):
+        key
+    })
+    return obj;
 };
 
 var map = (arr, func) => {
