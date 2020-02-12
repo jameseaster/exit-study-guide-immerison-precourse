@@ -88,7 +88,15 @@ var addKeysToExistingObj = (obj, newKey, newValue) => {
 };
 
 var map = (arr, func) => {
-    // your code here
+    // IOCE
+    // Input: array
+    // Output: new array with changed elements
+    // Constraints: use recursion
+    // Edge Cases: should output empty array if the length of the array is 0
+    let mappedArr = [];
+    if(!arr.length) return [];
+    mappedArr.push(func(arr[0]));
+    return mappedArr.concat(map(arr.slice(1), func));
 }
 
 
