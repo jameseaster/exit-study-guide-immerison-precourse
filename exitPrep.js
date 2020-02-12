@@ -16,38 +16,11 @@
 // Implement one function that is pure (pureShuffle),
 // and one that modifies the original array
 const pureShuffle = array => {
-// IOCE
-// inputs: array
-// output: copy of array that is randomly shuffled
-// constraints: must be pure
-// edge cases: n/a
-
-    let ourArr = [...array];
-    let randomArr = [];
-
-    while(ourArr.length){
-      let randomNum = (Math.floor(Math.random() * ourArr.length));
-      randomArr.push(ourArr[randomNum]);
-      ourArr.splice(randomNum, 1);
-    }
-    return randomArr;
+    // your code here
 };
 
 var isPalindrome = (string) => {
-    // IOCE
-    // input: string
-    // output: boolean
-    // constraints: should be case insensitive
-    // edge cases: return undefined if string is empty
-    if(string === '') return undefined;
-
-    if(string.length <= 1) return true;
-
-    if(string[0].toLowerCase() === string[string.length-1].toLowerCase()){
-        return isPalindrome(string.slice(1, string.length-1));
-    } else {
-        return false;
-    }
+    // your code here
 }
 
 const mergeObjects = obj => {
