@@ -16,15 +16,36 @@
 // Implement one function that is pure (pureShuffle),
 // and one that modifies the original array
 const pureShuffle = array => {
-    // your code here
+    const arrayCopy = [...array];
+    const shuffledElements = [];
+
+    while(arrayCopy.length){
+        let num = Math.floor(Math.random()*arrayCopy.length);
+        shuffledElements.push(arrayCopy[num]);
+        arrayCopy.splice(num, 1)
+    }
+
+    return shuffledElements;
 };
 
 var isPalindrome = (string) => {
-    // your code here
+    // IOCE
+    // Input: string
+    // Output: boolean
+    // Constraints: should return undefined if string is empty
+    // Edge cases: case insensitive
+
+    if (string === '') return undefined;
+    if (string.length <= 1) return true;
+    if (string[0].toLowerCase() === string[string.length-1].toLowerCase()) {
+        return isPalindrome(string.slice(1, string.length-1))
+    }
+    return false;
 }
 
-const mergeObjects = obj => {
+const mergeObjects = (obj, ...args) => {
     // your code here
+    return Object.assign(obj, ...args);
 };
 
 
@@ -34,15 +55,55 @@ const mergeObjects = obj => {
 //////////////////////////////////////////////////////
 
 var replaceValuesInObj = (obj, value, newValue) => {
-    // your code here
+    // IOCE
+    // Input: object, value, newValue
+    // Output: object with value replaced by newValue
+    // Constraints: use recursion
+    // Edge cases:
+
+    for(let key in obj){
+        if (obj[key] === value) obj[key] = newValue;
+        if (obj[key].constructor === Object) replaceValuesInObj(obj[key], value, newValue);
+    }
+    return obj;
 };
 
 var addKeysToExistingObj = (obj, newKey, newValue) => {
     // your code here
+    // IOCE
+    // Input: object, newKey, newValue
+    // Output: object with a new key/Value pair added at each level
+    // Constraints: use recursion
+    // Edge cases:
+
+    let keys = Object.keys(obj);
+    keys.push(newKey);
+    obj[newKey] = newValue;
+    keys.forEach((key)=>{
+        if (obj[key].constructor === Object){
+            addKeysToExistingObj(obj[key], newKey, newValue)
+        }
+    })
+    return obj;
 };
 
 var map = (arr, func) => {
     // your code here
+    // IOCE
+    // Input: array and a function
+    // Output: an array of transformed elements (from func)
+    // Constraints: use recursion,
+    //              should output empty array if the length of the array is 0
+    //              modify existing array
+    //              output new array
+    // Edge cases:
+
+    let arrayCopy = [...arr];
+    let transformedArr = [];
+    if (!arrayCopy.length) return [];
+    transformedArr.push(func(arrayCopy[0]));
+    transformedArr = transformedArr.concat(map(arrayCopy.slice(1), func));
+    return transformedArr;
 }
 
 
@@ -65,13 +126,18 @@ var comedians = [
 
 /* Solve by chaining native methods of map and filter only */
 var comediansFilteredAndMapped = (comedians) => {
-    // Your code here
-
+    return comedians.filter((obj)=>obj.begin >= 2005)
+    .map((comedian)=>{
+        return {
+            appearanceNumber: `#${comedian.number}`,
+            name: comedian.actor,
+            seasonsActive: comedian.end - comedian.begin + 1
+        }
+    });
 };
 
 var comedianNamesFilteredAndMapped = (comedians) => {
-    // Your code here
-
+    return comedians.filter((obj)=>obj.begin >= 2005).map((comedian)=> comedian.actor);
 };
 
 
@@ -79,13 +145,22 @@ var comedianNamesFilteredAndMapped = (comedians) => {
 
 /* Solve by using native method of reduce only */
 var comediansReduced1 = (comedians) => {
-    // Your code here
-
+    return comedians.reduce((comArr, cur)=>{
+        if(cur.begin >= 2005) comArr = comArr.concat(
+            {
+                appearanceNumber: `#${cur.number}`,
+                name: cur.actor,
+                seasonsActive: cur.end - cur.begin + 1
+            });
+        return comArr;
+    }, []);
 };
 
 var comediansReduced2 = (comedians) => {
-    // Your code here
-
+    return comedians.reduce((comArr, cur)=>{
+        if(cur.begin >= 2005) comArr = comArr.concat(cur.actor);
+        return comArr;
+    }, []);
 };
 
 
