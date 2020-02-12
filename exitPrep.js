@@ -157,8 +157,10 @@ var comediansReduced1 = (comedians) => {
 };
 
 var comediansReduced2 = (comedians) => {
-    // Your code here
-
+    return comedians.reduce((acc, cur)=>{
+        if(cur.begin >= 2005) acc = acc.concat(cur.actor);
+        return acc;
+    }, []);
 };
 
 
