@@ -119,8 +119,21 @@ var comedians = [
 
 /* Solve by chaining native methods of map and filter only */
 var comediansFilteredAndMapped = (comedians) => {
-    // Your code here
-
+    // IOCE
+    // Inputs: Array of objects
+    // Outputs: array of objects
+    // Constraints: only use filter nad map (not reduce),
+    //              cast members added from the year 2005 to present
+    //              cast members whose full name have more than 10 letters
+    //              make new keys (appearanceNumber, name, and seasonsActive)
+    // Edge Cases: The values cannot be directly mapped to new keys
+    return comedians.filter((comedian)=> comedian.begin >= 2005)
+        .map((obj)=>{ return {
+            appearanceNumber: `#${obj.number}`,
+            name: obj.actor,
+            seasonsActive: obj.end - obj.begin + 1
+            }
+        })
 };
 
 var comedianNamesFilteredAndMapped = (comedians) => {
