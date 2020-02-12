@@ -50,8 +50,9 @@ var isPalindrome = (string) => {
     }
 }
 
-const mergeObjects = obj => {
+const mergeObjects = (obj, ...args) => {
     // your code here
+    return Object.assign(obj, ...args);
 };
 
 
@@ -61,7 +62,15 @@ const mergeObjects = obj => {
 //////////////////////////////////////////////////////
 
 var replaceValuesInObj = (obj, value, newValue) => {
-    // your code here
+    for(let key in obj) {
+        if(obj[key] === value) {
+            obj[key] = newValue;
+        }
+        if(obj[key].constructor === Object){
+            obj[key] = replaceValuesInObj(obj[key], value, newValue);
+        }
+    }
+    return obj;
 };
 
 var addKeysToExistingObj = (obj, newKey, newValue) => {
